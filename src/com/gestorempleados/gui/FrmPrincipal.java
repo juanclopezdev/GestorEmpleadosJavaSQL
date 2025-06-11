@@ -5,7 +5,7 @@ import com.gestorempleados.dao.EmpleadoDAO;
 import com.gestorempleados.model.Empleado;
 import java.awt.HeadlessException;
 import java.math.BigDecimal;
-import java.sql.Date; // MUY IMPORTANTE: Usar java.sql.Date para JDBC
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -45,10 +45,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnEliminar.setText("Eliminar");
         btnLimpiar.setText("Limpiar");
         
-        if (tblEmpleados != null) { // Defensa contra NPE si la tabla aún no está lista
+        if (tblEmpleados != null) {
             tblEmpleados.clearSelection();
         }
-        txtNombre.requestFocus(); // Para que el cursor empiece en el campo Nombre
+        txtNombre.requestFocus();
     }
 
     private void configurarTabla() {
@@ -88,13 +88,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     private void limpiarCampos() {
-    // Restablecer placeholders en lugar de solo ponerlos en blanco
     addPlaceholderStyle(txtNombre, "Nombre del empleado");
     addPlaceholderStyle(txtApellido, "Apellido del empleado");
     addPlaceholderStyle(txtPuesto, "Puesto de trabajo");
     addPlaceholderStyle(txtSalario, "salario");
     addPlaceholderStyle(txtFechaContratacion, "YYYY-MM-DD");
-    // El txtId se pone en blanco porque no es un campo de entrada para el usuario.
     txtId.setText("");
 
     idSeleccionado = -1;
@@ -106,20 +104,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
 }
 
 private void addPlaceholderStyle(JTextField textField, String placeholderText) {
-    // Guarda el color de texto original (cuando no es placeholder)
-    // Es importante obtenerlo ANTES de cambiarlo a gris,
-    // o si todos los campos ya se ven igual, puedes hardcodear Color.BLACK
-    final Color defaultTextColor = textField.getForeground(); // O Color.BLACK si siempre es negro
-    final Color placeholderColor = Color.GRAY; // O Color.LIGHT_GRAY
+    final Color defaultTextColor = textField.getForeground();
+    final Color placeholderColor = Color.GRAY;
 
-    // Establecer el estado inicial del placeholder
     textField.setText(placeholderText);
     textField.setForeground(placeholderColor);
 
     textField.addFocusListener(new FocusAdapter() {
         @Override
         public void focusGained(FocusEvent e) {
-            // Si el texto es el placeholder y el color es el de placeholder
             if (textField.getText().equals(placeholderText) && textField.getForeground().equals(placeholderColor)) {
                 textField.setText("");
                 textField.setForeground(defaultTextColor);
@@ -128,7 +121,6 @@ private void addPlaceholderStyle(JTextField textField, String placeholderText) {
 
         @Override
         public void focusLost(FocusEvent e) {
-            // Si el campo está vacío al perder el foco
             if (textField.getText().isEmpty()) {
                 textField.setText(placeholderText);
                 textField.setForeground(placeholderColor);
@@ -310,11 +302,11 @@ private void addPlaceholderStyle(JTextField textField, String placeholderText) {
     }// </editor-fold>//GEN-END:initComponents
  
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -444,7 +436,7 @@ limpiarCampos();
     }//GEN-LAST:event_tblEmpleadosMouseClicked
 
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     /**
@@ -461,13 +453,6 @@ limpiarCampos();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        // Si prefieres el look and feel del sistema directamente:
-        // try {
-        //    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-        // } catch (Exception ex) {
-        //    java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        // }
-
 
         java.awt.EventQueue.invokeLater(() -> {
             new FrmPrincipal().setVisible(true);

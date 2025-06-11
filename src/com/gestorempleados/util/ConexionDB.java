@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class ConexionDB {
     private static final String URL = "jdbc:mysql://localhost:3306/gestor_empleados_db";
-    // REEMPLAZA CON TUS CREDENCIALES
     private static final String USER = "root";
     private static final String PASSWORD = "12345";
 
@@ -18,7 +17,7 @@ public class ConexionDB {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.err.println("FATAL ERROR: Driver JDBC de MySQL no encontrado. Asegúrate de que el JAR está en las librerías.");
-            // Lanzar una excepción aquí detendrá la aplicación si el driver no está, lo cual es bueno.
+            // Lanzar una excepción aquí detendrá la aplicación si el driver no está
             throw new RuntimeException("Driver MySQL no encontrado", e);
         }
     }
@@ -42,20 +41,12 @@ public class ConexionDB {
         return connection;
     }
 
-    /**
-     * Este método cierra la conexión ESTÁTICA compartida.
-     * En general, con try-with-resources en los DAOs, este método
-     * no debería ser llamado explícitamente durante el flujo normal de la aplicación,
-     * A MENOS QUE sea al final de la aplicación o en un caso de error muy específico.
-     * Los try-with-resources cierran la conexión que obtienen, y nuestro
-     * obtenerConexion() la reabrirá si es necesario.
-     */
-    public static void cerrarConexionGlobal() { // Cambié el nombre para mayor claridad
+    public static void cerrarConexionGlobal() {
         if (connection != null) {
             try {
                 System.out.println("Cerrando la conexión global a la BD..."); // Mensaje de depuración
                 connection.close();
-                connection = null; // Importante: poner a null después de cerrar para que obtenerConexion() cree una nueva.
+                connection = null;
                 System.out.println("Conexión global cerrada.");
             } catch (SQLException e) {
                 System.err.println("Error al cerrar la conexión global: " + e.getMessage());
@@ -63,7 +54,7 @@ public class ConexionDB {
         }
     }
 
-    // Este main es solo para pruebas directas de esta clase, puedes comentarlo o quitarlo luego.
+    // Este main es solo para pruebas directas de esta clase
     public static void main(String[] args) {
         Connection conn1 = ConexionDB.obtenerConexion();
         if (conn1 != null) {
@@ -93,8 +84,5 @@ public class ConexionDB {
         } else {
             System.out.println("Prueba 2: Fallo la obtención de conexión.");
         }
-        
-        // Cierre final si es necesario para terminar la prueba del main
-        // ConexionDB.cerrarConexionGlobal();
     }
 }
