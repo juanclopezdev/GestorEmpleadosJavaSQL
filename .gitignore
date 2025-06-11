@@ -1,0 +1,40 @@
+# Archivos de compilación
+build/
+dist/
+nbdist/
+target/
+*.jar
+*.war
+*.ear
+
+# Archivos temporales de NetBeans
+nbproject/private/
+nbproject/private.properties
+nbproject/project.properties~
+nbproject/project.xml~
+nbproject/build-impl.xml~
+nbproject/genfiles.properties~
+nb-configuration.xml
+
+# Logs
+*.log
+
+# Configuración de usuario de NetBeans (Var Cache)
+var/
+
+# Paquetes generados
+PKG-INFO
+*.orig
+
+# Bases de datos H2 (si la usaras y estuviera en el proyecto)
+# *.h2.db
+# *.trace.db
+# *.lock.db
+
+# Otros archivos del IDE
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+*.ipr
+*.iws
